@@ -5,138 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brewster Angle Calculator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
-            background-size: 400% 400%;
-            animation: gradientAnimation 10s ease infinite;
-            z-index: -1;
-        }
-
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-
-        input {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 100%; 
-        }
-
-        button {
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-
-        .error {
-            color: red;
-        }
-
-        .success {
-            color: green;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px 20px;
-                width: 90%; 
-            }
-
-            h1 {
-                font-size: 1.25rem;
-            }
-
-            button {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            input {
-                font-size: 14px;
-            }
-
-            label {
-                font-size: 0.9rem;
-            }
-
-            #result {
-                font-size: 16px;
-            }
-        }
+        /* Your existing styles here */
     </style>
 </head>
 <body>
-    <div class="background"></div> <!-- Background animation remains -->
-    <!-- Removed particles/bubbles effect -->
+    <div class="background"></div>
 
     <div class="container">
         <h1>Brewster Angle Calculator</h1>
@@ -147,8 +20,8 @@
             <label for="n2">Refractive Index of Medium 2 (n₂):</label>
             <input type="number" id="n2" step="0.01" placeholder="e.g., 1.5">
             
-            <button type="button" onclick="calculateBrewsterAngle()">Calculate</button>
-            <button type="button" onclick="resetForm()">Reset</button>
+            <button type="button" id="calculateBtn">Calculate</button>
+            <button type="button" id="resetBtn">Reset</button>
         </form>
         <div id="result"></div>
     </div>
@@ -178,14 +51,12 @@
                 return;
             }
 
-            // Algorithm: Calculate Brewster angle using the formula
-            // Brewster angle = arctan(n₂ / n₁)
-            // This formula is used to find the angle at which light with a specific polarization is perfectly transmitted through a transparent dielectric surface, with no reflection.
-            const brewsterAngleRad = Math.atan(n2 / n1); // Calculate the Brewster angle in radians
-            const brewsterAngleDeg = (brewsterAngleRad * 180) / Math.PI; // Convert radians to degrees
+            // Calculate Brewster angle using the formula
+            const brewsterAngleRad = Math.atan(n2 / n1); 
+            const brewsterAngleDeg = (brewsterAngleRad * 180) / Math.PI; 
 
-            resultElement.innerText = Brewster Angle: ${brewsterAngleDeg.toFixed(2)}°; // Display result
-            resultElement.className = "success"; // Show success style
+            resultElement.innerText = `Brewster Angle: ${brewsterAngleDeg.toFixed(2)}°`; 
+            resultElement.className = "success"; 
         }
 
         function resetForm() {
@@ -195,6 +66,10 @@
             resultElement.innerHTML = "";
             resultElement.className = "";
         }
+
+        // Add event listeners for buttons
+        document.getElementById("calculateBtn").addEventListener("click", calculateBrewsterAngle);
+        document.getElementById("resetBtn").addEventListener("click", resetForm);
     </script>
 </body>
 </html>
